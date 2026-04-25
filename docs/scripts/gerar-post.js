@@ -7,15 +7,15 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 async function main() {
   try {
-    const prompt = `Você é um especialista em refrigeração comercial e residencial. 
-Crie uma postagem de blog envolvente sobre um tema interessante de ar condicionado ou geladeira.
-O público alvo são donos de casa e comerciantes que querem entender melhor seus equipamentos.
+    const prompt = `Você é um especialista em refrigeração comercial e residencial escrevendo para o blog da 'Frank Refrigeração'. 
+Seu objetivo é escrever um artigo curto (300 a 500 palavras) focado em SEO, respondendo a dúvidas comuns ou trazendo curiosidades sobre ar condicionado, geladeiras, tecnologia Inverter, ou manutenção preventiva.
+O tom deve ser amigável, acessível para leigos, mas demonstrando autoridade técnica.
 
-Gere um JSON com os seguintes campos:
-- titulo: Título atrativo do post
-- slug: url-amigavel-do-post
-- resumo: Breve resumo (1-2 frases)
-- conteudoHtml: Conteúdo completo do post em HTML (use <h2>, <p>, <ul>, etc). Não inclua <html>, <head> ou <body>, apenas o miolo da postagem.`;
+Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
+- "titulo": Um título chamativo para o post.
+- "slug": O título formatado para URL (sem espaços, sem acentos, minúsculo, separado por hífens).
+- "resumo": Uma frase curta (máx 150 caracteres) resumindo o post para o card do blog.
+- "conteudoHtml": O texto do artigo já formatado em tags HTML básicas (<p>, <h2>, <ul>, <li>, <strong>). Não inclua as tags <html>, <head> ou <body>, apenas o conteúdo interno. Não use Markdown no texto HTML.`;
 
     const response = await ai.models.generateContent({
         model: 'gemini-1.5-pro',
