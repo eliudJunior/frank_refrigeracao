@@ -58,18 +58,20 @@ Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
     let blogHtml = fs.readFileSync(blogHtmlPath, 'utf8');
 
     const newCardHtml = `
-                    <!-- Post Gerado automaticamente pela IA -->
-                    <article class="service-card reveal" style="text-align: left;">
-                        <span class="badge" style="background: var(--primary-blue); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; margin-bottom: 1rem; display: inline-block;">IA HUMANIZADA</span>
-                        <div class="service-icon" style="font-size: 1.5rem; margin-bottom: 0.5rem;">❄️</div>
-                        <h3>${postData.titulo}</h3>
-                        <p>${postData.resumo}</p>
-                        <a href="blog/${fileName}" class="btn btn-outline" style="margin-top: 1rem; display: inline-block;">Ler artigo completo</a>
-                        <p class="back-link" style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted); cursor: pointer;" onclick="document.querySelector('.card-overlay').click()">← Voltar</p>
-                    </article>`;
+                        <!-- Post Gerado automaticamente pela IA -->
+                        <article class="blog-post">
+                            <div class="post-header">
+                                <span class="badge badge-primary">IA HUMANIZADA</span>
+                                <h2>${postData.titulo}</h2>
+                            </div>
+                            <div class="post-excerpt">
+                                <p>${postData.resumo}</p>
+                            </div>
+                            <a href="blog/${fileName}" class="btn btn-primary">Ler artigo completo</a>
+                        </article>`;
 
-    // Injetando no topo do service-grid
-    blogHtml = blogHtml.replace('<div class="service-grid">', '<div class="service-grid">\n' + newCardHtml);
+    // Injetando no topo do blog-feed
+    blogHtml = blogHtml.replace('<div class="blog-feed">', '<div class="blog-feed">\n' + newCardHtml);
     
     fs.writeFileSync(blogHtmlPath, blogHtml);
     console.log('blog.html atualizado com sucesso com o novo post.');

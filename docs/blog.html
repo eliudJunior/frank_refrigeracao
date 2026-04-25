@@ -49,53 +49,60 @@
             </div>
         </section>
 
-        <section class="blog-hub reveal" style="padding: 5rem 0;">
+        <section class="blog-layout reveal" style="padding: 5rem 0;">
             <div class="container">
-                <div class="service-grid">
-                    <!-- Post 1 (IA Generated) -->
-                    <article class="service-card reveal" style="text-align: left;">
-                        <span class="badge" style="background: var(--primary-blue); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; margin-bottom: 1rem; display: inline-block;">IA HUMANIZADA</span>
-                        <div class="service-icon" style="font-size: 1.5rem; margin-bottom: 0.5rem;">📜</div>
-                        <h3>O Segredo por trás do Frio: Como fomos do Gelo ao Inverter?</h3>
-                        <p>Você sabia que as primeiras "geladeiras" eram apenas armários de madeira com blocos de gelo gigantes?</p>
-                        <a href="blog/curiosidade-refrigeracao-antiga.html" class="btn btn-outline" style="margin-top: 1rem; display: inline-block;">Ler artigo completo</a>
-                        <p class="back-link" style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted); cursor: pointer;" onclick="document.querySelector('.card-overlay').click()">← Voltar</p>
-                    </article>
+                <div class="blog-container">
+                    <!-- Sidebar for Categories -->
+                    <aside class="blog-sidebar">
+                        <div class="sidebar-widget">
+                            <h3>Tópicos</h3>
+                            <ul class="category-list">
+                                <li><a href="#">Todas as Categorias</a></li>
+                                <li><a href="#">Tecnologia & IA</a></li>
+                                <li><a href="#">Manutenção</a></li>
+                                <li><a href="#">Curiosidades</a></li>
+                                <li><a href="#">Dicas Práticas</a></li>
+                            </ul>
+                        </div>
+                    </aside>
 
-                    <!-- Post 2 (IA Generated) -->
-                    <article class="service-card reveal" style="text-align: left;">
-                        <span class="badge" style="background: var(--accent-cyan); color: #041E42; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; margin-bottom: 1rem; display: inline-block;">TECNOLOGIA</span>
-                        <div class="service-icon" style="font-size: 1.5rem; margin-bottom: 0.5rem;">🤖</div>
-                        <h3>O Futuro é Inverter: Como a IA está gelando sua casa?</h3>
-                        <p>A inteligência artificial já chegou nos ares-condicionados modernos. Entenda como ela economiza até 70% na sua conta.</p>
-                        <a href="blog/futuro-inverter-ia.html" class="btn btn-outline" style="margin-top: 1rem; display: inline-block;">Explorar Tecnologia</a>
-                        <p class="back-link" style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted); cursor: pointer;" onclick="document.querySelector('.card-overlay').click()">← Voltar</p>
-                    </article>
+                    <!-- Blog Feed -->
+                    <div class="blog-feed">
+                        <!-- Post 1 (IA Generated) -->
+                        <article class="blog-post">
+                            <div class="post-header">
+                                <span class="badge badge-primary">IA HUMANIZADA</span>
+                                <h2>O Segredo por trás do Frio: Como fomos do Gelo ao Inverter?</h2>
+                            </div>
+                            <div class="post-excerpt">
+                                <p>Você sabia que as primeiras "geladeiras" eram apenas armários de madeira com blocos de gelo gigantes? Descubra a evolução da refrigeração até os dias de hoje.</p>
+                            </div>
+                            <a href="blog/curiosidade-refrigeracao-antiga.html" class="btn btn-primary">Ler artigo completo</a>
+                        </article>
 
-                    <!-- Tip 1 -->
-                    <article class="service-card reveal" style="text-align: left;">
-                        <small style="color: var(--primary-blue); font-weight: 600;">MANUTENÇÃO</small>
-                        <h3>Limpar Filtro sozinho?</h3>
-                        <p>A limpeza do filtro de nylon deve ser feita a cada 15 dias. Veja o guia rápido.</p>
-                        <a href="lp/manutencao-ar-condicionado.html" class="btn btn-outline" style="margin-top: 1rem; display: inline-block;">Ver Guia</a>
-                        <p class="back-link" style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted); cursor: pointer;" onclick="document.querySelector('.card-overlay').click()">← Voltar</p>
-                    </article>
-                </div>
+                        <!-- Post 2 (IA Generated) -->
+                        <article class="blog-post">
+                            <div class="post-header">
+                                <span class="badge badge-accent">TECNOLOGIA</span>
+                                <h2>O Futuro é Inverter: Como a IA está gelando sua casa?</h2>
+                            </div>
+                            <div class="post-excerpt">
+                                <p>A inteligência artificial já chegou nos ares-condicionados modernos. Entenda como ela economiza até 70% na sua conta e otimiza o conforto térmico.</p>
+                            </div>
+                            <a href="blog/futuro-inverter-ia.html" class="btn btn-primary">Explorar Tecnologia</a>
+                        </article>
 
-                <!-- AEO FAQ Capsule Integrated -->
-                <div style="margin-top: 5rem;">
-                    <div class="section-title">
-                        <h2>Perguntas Frequentes (FAQ)</h2>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <h2>Quanto tempo demora uma instalação de split?</h2>
-                        <p>Uma instalação padrão leva entre 3 a 5 horas, dependendo da complexidade da infraestrutura e se há necessidade de novos pontos elétricos.</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h2>Vocês atendem aos sábados?</h2>
-                        <p>Sim! Realizamos atendimentos de emergência e manutenções agendadas aos sábados das 08:00 às 13:00.</p>
+                        <!-- Tip 1 -->
+                        <article class="blog-post">
+                            <div class="post-header">
+                                <span class="badge badge-outline">MANUTENÇÃO</span>
+                                <h2>Limpar Filtro sozinho?</h2>
+                            </div>
+                            <div class="post-excerpt">
+                                <p>A limpeza do filtro de nylon deve ser feita a cada 15 dias. Veja o guia rápido e prático para garantir o melhor funcionamento do seu aparelho.</p>
+                            </div>
+                            <a href="lp/manutencao-ar-condicionado.html" class="btn btn-primary">Ver Guia</a>
+                        </article>
                     </div>
                 </div>
             </div>
