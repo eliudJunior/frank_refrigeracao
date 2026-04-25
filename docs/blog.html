@@ -69,7 +69,7 @@
                     <!-- Blog Feed -->
                     <div class="blog-feed">
                         <!-- Post 1 (IA Generated) -->
-                        <article class="blog-post">
+                        <article class="blog-post" data-category="Curiosidades" style="transition: opacity 0.3s ease;">
                             <div class="post-header">
                                 <span class="badge badge-primary">IA HUMANIZADA</span>
                                 <h2>O Segredo por trás do Frio: Como fomos do Gelo ao Inverter?</h2>
@@ -93,7 +93,7 @@
                         </article>
 
                         <!-- Tip 1 -->
-                        <article class="blog-post">
+                        <article class="blog-post" data-category="Manutenção" style="transition: opacity 0.3s ease;">
                             <div class="post-header">
                                 <span class="badge badge-outline">MANUTENÇÃO</span>
                                 <h2>Limpar Filtro sozinho?</h2>
@@ -137,5 +137,38 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const categories = document.querySelectorAll('.category-list a');
+            const posts = document.querySelectorAll('.blog-post');
+
+            categories.forEach(category => {
+                category.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedCategory = e.target.textContent.trim();
+
+                    // Remove estilo de ativo das outras categorias
+                    categories.forEach(c => c.parentElement.classList.remove('active'));
+                    e.target.parentElement.classList.add('active');
+                    
+                    // Simple highlighting for UI feedback
+                    categories.forEach(c => c.style.fontWeight = 'normal');
+                    e.target.style.fontWeight = 'bold';
+
+                    posts.forEach(post => {
+                        const postCategory = post.getAttribute('data-category');
+                        if (selectedCategory === 'Todas as Categorias' || selectedCategory === postCategory) {
+                            post.style.display = 'block';
+                            setTimeout(() => post.style.opacity = '1', 50); // fade in effect
+                        } else {
+                            post.style.opacity = '0';
+                            setTimeout(() => post.style.display = 'none', 300); // fade out effect
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
+l>

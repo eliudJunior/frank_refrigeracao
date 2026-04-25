@@ -7,9 +7,23 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 async function main() {
   try {
+    const categorias = ["Tecnologia & IA", "Manutenção", "Curiosidades", "Dicas Práticas"];
+    const badges = ["badge-accent", "badge-outline", "badge-secondary", "badge-primary"];
+    const coresBadge = ["TECNOLOGIA", "MANUTENÇÃO", "CURIOSIDADE", "DICA PRÁTICA"];
+    
+    // Calcula o dia do ano para criar um ciclo balanceado perfeito
+    const agora = new Date();
+    const diaDoAno = Math.floor((agora - new Date(agora.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    const indiceCategoria = diaDoAno % categorias.length;
+    
+    const categoriaSorteada = categorias[indiceCategoria];
+    const badgeSorteada = badges[indiceCategoria];
+    const badgeTexto = coresBadge[indiceCategoria];
+
     const prompt = `Você é um especialista em refrigeração comercial e residencial escrevendo para o blog da 'Frank Refrigeração'. 
 Seu objetivo é escrever um artigo completo e aprofundado (800 a 1200 palavras) focado em SEO. 
-Pesquise e aborde tendências recentes, inovações tecnológicas ou guias definitivos de manutenção sobre ar condicionado, geladeiras, ou tecnologia Inverter. Não faça apenas comentários rasos, entregue um conteúdo rico, útil e com dicas práticas reais.
+O TEMA PRINCIPAL DEVE SER ESTRITAMENTE FOCADO NA CATEGORIA: "${categoriaSorteada}".
+Pesquise e aborde tendências recentes, inovações tecnológicas ou guias definitivos sobre ar condicionado, geladeiras, ou tecnologia Inverter, que se encaixem perfeitamente em ${categoriaSorteada}. Não faça apenas comentários rasos, entregue um conteúdo rico, útil e com dicas práticas reais.
 O tom deve ser amigável, acessível para leigos, mas demonstrando alta autoridade técnica.
 
 Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
@@ -59,9 +73,9 @@ Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
 
     const newCardHtml = `
                         <!-- Post Gerado automaticamente pela IA -->
-                        <article class="blog-post">
+                        <article class="blog-post" data-category="${categoriaSorteada}" style="transition: opacity 0.3s ease;">
                             <div class="post-header">
-                                <span class="badge badge-primary">IA HUMANIZADA</span>
+                                <span class="badge ${badgeSorteada}">${badgeTexto}</span>
                                 <h2>${postData.titulo}</h2>
                             </div>
                             <div class="post-excerpt">
