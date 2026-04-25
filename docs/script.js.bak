@@ -1,0 +1,147 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Smooth scrolling for Anchor links ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // --- Advanced Interactive Service Cards (FLIP Technique) ---
+    const serviceCards = document.querySelectorAll('.service-card');
+    const overlay = document.querySelector('.card-overlay');
+
+    if (serviceCards && overlay) {
+        serviceCards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (card.classList.contains('expanded') || card.classList.contains('expanding')) return;
+
+                // 1. Capture initial state
+                const rect = card.getBoundingClientRect();
+                const initialStyles = {
+                    top: rect.top + 'px',
+                    left: rect.left + 'px',
+                    width: rect.width + 'px',
+                    height: rect.height + 'px'
+                };
+
+                // 2. Create Placeholder to keep the grid stable
+                const placeholder = document.createElement('div');
+                placeholder.className = 'card-placeholder';
+                placeholder.style.width = initialStyles.width;
+                placeholder.style.height = initialStyles.height;
+                card.parentNode.insertBefore(placeholder, card);
+
+                // 3. Set card to fixed at starting position
+                Object.assign(card.style, initialStyles);
+                card.classList.add('expanding');
+                document.body.classList.add('modal-open');
+                overlay.classList.add('active');
+
+                // 4. Animate to expanded state (center)
+                // We use requestAnimationFrame to ensure the 'fixed' styles are applied before animating
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        card.classList.add('expanded');
+                        // Remove inline styles to let CSS 'expanded' class take over centering
+                        card.style.top = '';
+                        card.style.left = '';
+                        card.style.width = '';
+                        card.style.height = '';
+                    });
+                });
+            });
+
+            // Close logic
+            const closeHandler = (e) => {
+                if (e) e.stopPropagation();
+                const placeholder = document.querySelector('.card-placeholder');
+                if (!placeholder) return;
+
+                const rect = placeholder.getBoundingClientRect();
+                
+                // Animate back to placeholder position
+                card.classList.remove('expanded');
+                Object.assign(card.style, {
+                    top: rect.top + 'px',
+                    left: rect.left + 'px',
+                    width: rect.width + 'px',
+                    height: rect.height + 'px'
+                });
+
+                overlay.classList.remove('active');
+                document.body.classList.remove('modal-open');
+
+                setTimeout(() => {
+                    card.classList.remove('expanding');
+                    card.style.top = '';
+                    card.style.left = '';
+                    card.style.width = '';
+                    card.style.height = '';
+                    placeholder.remove();
+                }, 600); // Matches CSS transition duration
+            };
+
+            // Use close button if it exists, or clicking overlay
+            card.addEventListener('click', (e) => {
+                if (e.target.classList.contains('close-card')) {
+                    closeHandler(e);
+                }
+            });
+
+            overlay.addEventListener('click', closeHandler);
+        });
+    }
+
+    // --- BTU Calculator Logic ---
+    const btuForm = document.getElementById('btu-calc-form');
+    if (btuForm) {
+        btuForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const area = parseFloat(document.getElementById('area').value) || 0;
+            const people = parseFloat(document.getElementById('people').value) || 0;
+            const electronics = parseFloat(document.getElementById('electronics').value) || 0;
+            const sun = document.getElementById('sun').value;
+
+            const baseFactor = sun === 'strong' ? 800 : 600;
+            let result = area * baseFactor;
+            result += (people > 1 ? (people - 1) : 0) * baseFactor;
+            result += electronics * baseFactor;
+
+            const display = document.getElementById('btu-result');
+            display.innerHTML = `Potência Recomendada: <strong>${result} BTUs</strong>`;
+            display.style.display = 'block';
+        });
+    }
+
+    // --- Scroll Reveal Animation ---
+    const revealCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    };
+
+    const revealObserver = new IntersectionObserver(revealCallback, {
+        threshold: 0.15
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    console.log("Frank Refrigeração v3.1: Animações Suaves e Elegantes ativadas.");
+});

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compre seu ar condicionado ou geladeira com a Frank Refrigeração. Dimensionamento técnico e instalação garantida.">
+    <title>Venda de Equipamentos e Consultoria | Frank Refrigeração</title>
+    <link rel="icon" href="data:,">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body><div class="card-overlay"></div>
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;"><span class="logo-bold">Frank</span> Refrigeração</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="vendas.html" class="active">Vendas</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="sobre-nos.html">Sobre Nós</a></li>
+                    <li><a href="index.html#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <a href="https://wa.me/5587988517205" class="btn btn-primary" data-whatsapp-direct="Olá, Frank Refrigeração. Quero solicitar um orçamento.">Solicitar Orçamento</a>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li>Vendas</li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header reveal" style="background: linear-gradient(135deg, #041E42 0%, #00D4FF 100%);">
+            <div class="container">
+                <h1>Venda e Dimensionamento</h1>
+                <p>Aparelhos novos com garantia, entrega e instalação integrada.</p>
+            </div>
+        </section>
+
+        <section class="sales-content reveal" style="padding: 5rem 0;">
+            <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: start;">
+                <div class="sales-text">
+                    <h2>Por que comprar conosco?</h2>
+                    <p>Muitas pessoas compram aparelhos subdimensionados ou com tecnologia defasada em grandes varejistas. Com a Frank Refrigeração, você recebe uma <strong>consultoria técnica</strong> antes da compra.</p>
+                    
+                    <ul class="cert-list" style="margin-top: 2rem;">
+                        <li><strong>Dimensionamento BTUs:</strong> Calculamos a carga térmica exata do seu ambiente.</li>
+                        <li><strong>Marcas Premium:</strong> Revenda autorizada LG, Midea, Carrier e Daikin.</li>
+                        <li><strong>Instalação Inclusa:</strong> Compre e instale no mesmo processo, mantendo a garantia total.</li>
+                        <li><strong>Suporte Pós-Venda:</strong> Atendimento prioritário para clientes que compram conosco.</li>
+                    </ul>
+
+                    <div style="margin-top: 3rem; background: var(--silver); padding: 2rem; border-radius: var(--border-radius);">
+                        <h3>Marcas que Confiamos</h3>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; opacity: 0.7;">
+                            <span style="font-weight: 800;">LG</span>
+                            <span style="font-weight: 800;">MIDEA</span>
+                            <span style="font-weight: 800;">DAIKIN</span>
+                            <span style="font-weight: 800;">GREE</span>
+                            <span style="font-weight: 800;">ELECTROLUX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whatsapp-card" style="margin: 0;">
+                    <h3>Consultar Modelos e Preços</h3>
+                    <p>Fale pelo WhatsApp e informe o tipo de equipamento, metragem aproximada do ambiente e se deseja incluir instalação.</p>
+                    <ul class="cert-list">
+                        <li>Indicação de potência adequada.</li>
+                        <li>Modelos compatíveis com seu ambiente.</li>
+                        <li>Orientação sobre instalação e garantia.</li>
+                    </ul>
+                    <a href="https://wa.me/5587988517205" class="btn btn-primary btn-large" data-whatsapp-direct="Olá, Frank Refrigeração. Quero consultar modelos e preços de equipamentos." style="width: 100%; margin-top: 1rem;">Chamar Consultor no WhatsApp</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="btu-calculator-section reveal" style="padding: 5rem 0; background-color: var(--ice-blue);">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-title">
+                <h2>Calculadora de Potência (BTU)</h2>
+                <p>Descubra a potência ideal para seu ar condicionado em poucos segundos.</p>
+            </div>
+            <div class="form-container" style="margin-top: 2rem;">
+                <form id="btu-calc-form">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="btu-area">Área do Ambiente (m²)</label>
+                            <input type="number" id="btu-area" class="form-control" placeholder="Ex: 20" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="people">Nº de Pessoas</label>
+                            <input type="number" id="people" class="form-control" placeholder="Ex: 2" required>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="electronics">Nº de Eletrônicos ligados</label>
+                            <input type="number" id="electronics" class="form-control" placeholder="Ex: 1">
+                        </div>
+                        <div class="form-group">
+                            <label for="sun">Exposição ao Sol</label>
+                            <select id="sun" class="form-control">
+                                <option value="weak">Manhã (Fraco)</option>
+                                <option value="strong">Tarde Inteira (Forte)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Calcular BTUs</button>
+                    <div id="btu-result" style="margin-top: 2rem; padding: 1.5rem; background: var(--silver); border-radius: var(--border-radius); text-align: center; display: none;">
+                        <!-- Resultado aparece aqui -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contato" class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <span class="logo-bold">Frank</span> Refrigeração
+                <p>Referência em instalação, consertos e vendas com total transparência e preço justo.</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contato</h4>
+                <p><a href="tel:+5587988517205">📞 +55 (87) 98851-7205</a></p>
+                <p><a href="mailto:frank_trader20@hotmail.com">✉️ frank_trader20@hotmail.com</a></p>
+                <p>📍 Rua das Serpentes, 71 - Dom Avelar, Petrolina-PE, 56330-250, Brasil</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Frank Refrigeração. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

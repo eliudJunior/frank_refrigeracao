@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog de Refrigeração: {{TITULO}}">
+    <title>{{TITULO}} | Frank Refrigeração</title>
+    <link rel="icon" href="data:,">
+    
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="card-overlay"></div>
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;"><span class="logo-bold">Frank</span> Refrigeração</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="../servicos.html">Serviços</a></li>
+                    <li><a href="../vendas.html">Vendas</a></li>
+                    <li><a href="../blog.html" class="active">Blog</a></li>
+                    <li><a href="../sobre-nos.html">Sobre Nós</a></li>
+                    <li><a href="../index.html#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <a href="https://wa.me/5587988517205" class="btn btn-primary" data-whatsapp-direct="Olá, Frank Refrigeração. Quero solicitar um orçamento.">Solicitar Orçamento</a>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Início</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li>{{TITULO}}</li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header reveal">
+            <div class="container">
+                <h1>{{TITULO}}</h1>
+            </div>
+        </section>
+
+        <section class="blog-hub reveal" style="padding: 5rem 0;">
+            <div class="container" style="max-width: 800px; margin: 0 auto; text-align: left;">
+                {{CONTEUDO}}
+                
+                <p class="back-link" style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted); cursor: pointer;" onclick="window.history.back()">← Voltar</p>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section class="sales-banner reveal" style="background-color: var(--dark-blue); color: var(--pure-white);">
+            <div class="container">
+                <h2 style="color: var(--pure-white);">Deseja um conteúdo personalizado ou tem uma dúvida técnica?</h2>
+                <p>Nossos técnicos e nossa IA estão prontos para te ajudar.</p>
+                <a href="https://wa.me/5587988517205" class="btn btn-primary btn-large" data-whatsapp-direct="Olá, Frank Refrigeração. Tenho uma dúvida técnica e quero falar com um especialista.">Solicitar Ajuda</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contato" class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <span class="logo-bold">Frank</span> Refrigeração
+                <p>Referência em instalação, consertos e vendas com total transparência e preço justo.</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contato</h4>
+                <p><a href="tel:+5587988517205">📞 +55 (87) 98851-7205</a></p>
+                <p><a href="mailto:frank_trader20@hotmail.com">✉️ frank_trader20@hotmail.com</a></p>
+                <p>📍 Rua das Serpentes, 71 - Dom Avelar, Petrolina-PE, 56330-250, Brasil</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Frank Refrigeração. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
