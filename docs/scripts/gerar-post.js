@@ -8,20 +8,22 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 async function main() {
   try {
     const prompt = `Você é um especialista em refrigeração comercial e residencial escrevendo para o blog da 'Frank Refrigeração'. 
-Seu objetivo é escrever um artigo curto (300 a 500 palavras) focado em SEO, respondendo a dúvidas comuns ou trazendo curiosidades sobre ar condicionado, geladeiras, tecnologia Inverter, ou manutenção preventiva.
-O tom deve ser amigável, acessível para leigos, mas demonstrando autoridade técnica.
+Seu objetivo é escrever um artigo completo e aprofundado (800 a 1200 palavras) focado em SEO. 
+Pesquise e aborde tendências recentes, inovações tecnológicas ou guias definitivos de manutenção sobre ar condicionado, geladeiras, ou tecnologia Inverter. Não faça apenas comentários rasos, entregue um conteúdo rico, útil e com dicas práticas reais.
+O tom deve ser amigável, acessível para leigos, mas demonstrando alta autoridade técnica.
 
 Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
 - "titulo": Um título chamativo para o post.
 - "slug": O título formatado para URL (sem espaços, sem acentos, minúsculo, separado por hífens).
 - "resumo": Uma frase curta (máx 150 caracteres) resumindo o post para o card do blog.
-- "conteudoHtml": O texto do artigo já formatado em tags HTML básicas (<p>, <h2>, <ul>, <li>, <strong>). Não inclua as tags <html>, <head> ou <body>, apenas o conteúdo interno. Não use Markdown no texto HTML.`;
+- "conteudoHtml": O texto do artigo completo já formatado em tags HTML básicas (<p>, <h2>, <h3>, <ul>, <li>, <strong>). Não inclua as tags <html>, <head> ou <body>, apenas o conteúdo interno. Não use Markdown no texto HTML.`;
 
     const response = await ai.models.generateContent({
         model: 'gemini-1.5-pro',
         contents: prompt,
         config: {
             responseMimeType: 'application/json',
+            tools: [{ googleSearch: {} }]
         }
     });
 
