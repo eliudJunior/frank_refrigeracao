@@ -1118,6 +1118,12 @@ body.modal-open {
     transition: transform var(--transition-speed);
 }
 
+.feature-icon-wrapper svg {
+    width: 1em;
+    height: 1em;
+    display: block;
+}
+
 .feature-block:hover .feature-icon-wrapper {
     transform: translateY(-5px);
     border-color: var(--primary-blue);
