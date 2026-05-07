@@ -33,15 +33,20 @@ Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
 - "conteudoHtml": O texto do artigo completo já formatado em tags HTML básicas (<p>, <h2>, <h3>, <ul>, <li>, <strong>). Não inclua as tags <html>, <head> ou <body>, apenas o conteúdo interno. Não use Markdown no texto HTML.`;
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash',
         contents: prompt,
         config: {
-            responseMimeType: 'application/json',
-            tools: [{ googleSearch: {} }]
+            responseMimeType: 'application/json'
         }
     });
 
-    const postData = JSON.parse(response.text);
+    let textResponse = response.text;
+    // Fallback: remover possíveis blocos de código markdown que a IA possa ter retornado mesmo pedindo JSON
+    if (textResponse.startsWith('```json')) {
+        textResponse = textResponse.replace(/```json\n?/, '').replace(/```$/, '');
+    }
+
+    const postData = JSON.parse(textResponse);
     
     const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
     const fileName = `${today}-${postData.slug}.html`;
