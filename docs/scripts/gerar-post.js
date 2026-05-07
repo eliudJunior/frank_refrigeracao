@@ -33,7 +33,7 @@ Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
 - "conteudoHtml": O texto do artigo completo já formatado em tags HTML básicas (<p>, <h2>, <h3>, <ul>, <li>, <strong>). Não inclua as tags <html>, <head> ou <body>, apenas o conteúdo interno. Não use Markdown no texto HTML.`;
 
     const response = await ai.models.generateContent({
-        model: 'gemini-1.5-pro',
+        model: 'gemini-2.5-flash',
         contents: prompt,
         config: {
             responseMimeType: 'application/json',
