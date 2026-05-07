@@ -5,6 +5,42 @@ const path = require('path');
 // Inicializando a API do Gemini
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
+// Função com Retry e Exponential Backoff para lidar com Rate Limits (Erro 429)
+async function generateWithRetry(ai, prompt, maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await ai.models.generateContent({
+        model: 'gemini-2.0-flash',
+        contents: prompt,
+        config: {
+            responseMimeType: 'application/json'
+        }
+      });
+    } catch (error) {
+      if (error.status === 429 && attempt < maxRetries) {
+        // Tenta extrair o delay da resposta de erro (RetryInfo) ou usa backoff exponencial
+        let delayMs = Math.pow(2, attempt) * 2000; // Começa com 4s, 8s...
+        
+        // Verifica se a API informou um tempo de espera
+        if (error.details && Array.isArray(error.details)) {
+          const retryInfo = error.details.find(d => d['@type'] === 'type.googleapis.com/google.rpc.RetryInfo');
+          if (retryInfo && retryInfo.retryDelay) {
+             const seconds = parseInt(retryInfo.retryDelay.replace('s', ''));
+             if (!isNaN(seconds)) {
+                 delayMs = seconds * 1000 + 1000; // Adiciona 1s de margem
+             }
+          }
+        }
+        
+        console.log(`[Rate Limit 429] Quota excedida. Tentando novamente em ${delayMs/1000} segundos... (Tentativa ${attempt}/${maxRetries})`);
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+      } else {
+        throw error; // Se não for 429 ou já estourou tentativas, lança o erro
+      }
+    }
+  }
+}
+
 async function main() {
   try {
     const categorias = ["Tecnologia & IA", "Manutenção", "Curiosidades", "Dicas Práticas"];
@@ -32,13 +68,7 @@ Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
 - "resumo": Uma frase curta (máx 150 caracteres) resumindo o post para o card do blog.
 - "conteudoHtml": O texto do artigo completo já formatado em tags HTML básicas (<p>, <h2>, <h3>, <ul>, <li>, <strong>). Não inclua as tags <html>, <head> ou <body>, apenas o conteúdo interno. Não use Markdown no texto HTML.`;
 
-    const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash',
-        contents: prompt,
-        config: {
-            responseMimeType: 'application/json'
-        }
-    });
+    const response = await generateWithRetry(ai, prompt);
 
     let textResponse = response.text;
     // Fallback: remover possíveis blocos de código markdown que a IA possa ter retornado mesmo pedindo JSON
