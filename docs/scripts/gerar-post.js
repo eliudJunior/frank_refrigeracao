@@ -40,9 +40,9 @@ async function main() {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     
-    const categorias = ["Tecnologia & IA", "Manutenção", "Curiosidades", "Dicas Práticas"];
-    const badges = ["badge-accent", "badge-outline", "badge-secondary", "badge-primary"];
-    const coresBadge = ["TECNOLOGIA", "MANUTENÇÃO", "CURIOSIDADE", "DICA PRÁTICA"];
+    const categorias = ["Manutenção Preventiva", "Climatização", "Consertos Rápidos", "Economia & Dicas"];
+    const badges = ["badge-primary", "badge-accent", "badge-secondary", "badge-outline"];
+    const coresBadge = ["MANUTENÇÃO", "AR-CONDICIONADO", "CONSERTO", "DICA DO TÉCNICO"];
     
     const agora = new Date();
     const diaDoAno = Math.floor((agora - new Date(agora.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
@@ -52,16 +52,24 @@ async function main() {
     const badgeSorteada = badges[indiceCategoria];
     const badgeTexto = coresBadge[indiceCategoria];
 
-    const prompt = `Você é um especialista em refrigeração comercial e residencial escrevendo para o blog da 'Frank Refrigeração'. 
-Seu objetivo é escrever um artigo completo e aprofundado (800 a 1200 palavras) focado em SEO. 
-O TEMA PRINCIPAL DEVE SER ESTRITAMENTE FOCADO NA CATEGORIA: "${categoriaSorteada}".
-Aborde tendências, inovações ou guias sobre ar condicionado e refrigeração.
+    const prompt = `Você é o Frank, um técnico especialista em refrigeração com mais de 20 anos de experiência em Petrolina e região do Vale do São Francisco. 
+Você NÃO é uma IA. Você é um profissional "mão na massa" que escreve para ajudar seus clientes.
+
+SEU OBJETIVO: Escrever um artigo técnico, humano e prático (800 a 1200 palavras) para o seu blog.
+CATEGORIA DO DIA: "${categoriaSorteada}".
+
+DIRETRIZES DE ESTILO E VOZ:
+1. Tom de Voz: Direto, técnico mas acessível, empático e autoritário. Use termos como "chão de oficina", "peças originais", "carga de gás".
+2. Localidade: Mencione naturalmente Petrolina, Juazeiro ou o calor do Vale do São Francisco.
+3. SEO Humano: Foque em termos como "Técnico em Refrigeração em Petrolina", "Soluções de Ar Condicionado", "Conserto de Geladeira", "Manutenção de Máquina de Lavar".
+4. Estrutura: Use subtítulos que respondam a dúvidas reais (ex: "Por que seu ar parou de gelar no calor de Petrolina?").
+5. PROIBIDO: Mencionar que é uma IA, usar linguagem robótica ou marketing genérico.
 
 Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
-- "titulo": Título chamativo.
-- "slug": Título formatado para URL (ex: titulo-do-post).
-- "resumo": Máximo 150 caracteres.
-- "conteudoHtml": Conteúdo em HTML (use <h2>, <p>, <ul>, <li>). Sem Markdown.`;
+- "titulo": Título focado em SEO e solução (ex: "Como economizar 30% na conta de luz com seu Ar Condicionado em Petrolina").
+- "slug": Título formatado para URL.
+- "resumo": Uma introdução rápida e chamativa (máx 150 caracteres).
+- "conteudoHtml": Conteúdo rico em HTML (use <h2>, <p>, <ul>, <li>). Sem Markdown.`;
 
     const response = await generateWithRetry(model, prompt);
     let textResponse = response.text();
