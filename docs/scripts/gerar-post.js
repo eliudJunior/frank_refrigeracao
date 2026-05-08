@@ -38,11 +38,6 @@ async function generateWithRetry(model, prompt, maxRetries = 3) {
 
 async function main() {
   try {
-    const modelsResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${process.env.GEMINI_API_KEY}`);
-    const modelsData = await modelsResponse.json();
-    console.log("Modelos Disponíveis:");
-    modelsData.models.forEach(m => console.log(`- ${m.name}`));
-
     const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
     
     const categorias = ["Manutenção Preventiva", "Climatização", "Consertos Rápidos", "Economia & Dicas"];
