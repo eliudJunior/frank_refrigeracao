@@ -9,7 +9,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 async function generateWithRetry(model, prompt, maxRetries = 3) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      // Usando gemini-2.0-flash para maior compatibilidade regional nos Runners do GitHub
+      // Usando gemini-1.5-pro para maior compatibilidade regional nos Runners do GitHub
       const result = await model.generateContent({
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         generationConfig: {
@@ -38,7 +38,7 @@ async function generateWithRetry(model, prompt, maxRetries = 3) {
 
 async function main() {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
     
     const categorias = ["Manutenção Preventiva", "Climatização", "Consertos Rápidos", "Economia & Dicas"];
     const badges = ["badge-primary", "badge-accent", "badge-secondary", "badge-outline"];
