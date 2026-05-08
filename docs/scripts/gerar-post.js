@@ -75,7 +75,7 @@ Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
     let textResponse = response.text();
     
     // Limpeza de possíveis marcações de markdown
-    textResponse = textResponse.replace(/```json\n?/, '').replace(/```$/, '').trim();
+    textResponse = textResponse.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
 
     const postData = JSON.parse(textResponse);
     
