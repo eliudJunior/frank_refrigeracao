@@ -43,7 +43,7 @@ async function main() {
     console.log("Modelos Disponíveis:");
     modelsData.models.forEach(m => console.log(`- ${m.name}`));
 
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
     
     const categorias = ["Manutenção Preventiva", "Climatização", "Consertos Rápidos", "Economia & Dicas"];
     const badges = ["badge-primary", "badge-accent", "badge-secondary", "badge-outline"];
