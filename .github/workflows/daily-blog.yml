@@ -43,8 +43,3 @@ jobs:
           git add docs/blog.html docs/blog/ docs/sitemap.xml
           git commit -m "chore(blog): generate daily post via Gemini API" || echo "No changes to commit"
           git push
-
-      - name: Ping Google Sitemap
-        run: |
-          curl -sS "https://www.google.com/ping?sitemap=https://refrigeracaopnz.com.br/sitemap.xml" > /dev/null
-          echo "Google notificado sobre o novo sitemap!"
