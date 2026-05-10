@@ -36,6 +36,53 @@ async function generateWithRetry(model, prompt, maxRetries = 3) {
   }
 }
 
+function updateSitemap() {
+  const domain = 'https://refrigeracaopnz.com.br';
+  const docsDir = path.join(__dirname, '..');
+  const blogDir = path.join(docsDir, 'blog');
+  const sitemapPath = path.join(docsDir, 'sitemap.xml');
+
+  const pages = [
+    '',
+    'index.html',
+    'servicos.html',
+    'vendas.html',
+    'blog.html',
+    'sobre-nos.html'
+  ];
+
+  let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+`;
+
+  // Adicionar páginas principais
+  pages.forEach(page => {
+    sitemapContent += `  <url>
+    <loc>${domain}/${page}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>${page === '' || page === 'index.html' ? '1.0' : '0.8'}</priority>
+  </url>\n`;
+  });
+
+  // Adicionar posts do blog
+  if (fs.existsSync(blogDir)) {
+    const posts = fs.readdirSync(blogDir).filter(file => file.endsWith('.html'));
+    posts.forEach(post => {
+      sitemapContent += `  <url>
+    <loc>${domain}/blog/${post}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>\n`;
+    });
+  }
+
+  sitemapContent += `</urlset>`;
+  fs.writeFileSync(sitemapPath, sitemapContent);
+  console.log(`Sitemap atualizado em: ${sitemapPath}`);
+}
+
 async function main() {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
@@ -93,9 +140,14 @@ Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
     
     templateHtml = templateHtml.replace(/\{\{TITULO\}\}/g, postData.titulo);
     templateHtml = templateHtml.replace(/\{\{CONTEUDO\}\}/g, postData.conteudoHtml);
+    templateHtml = templateHtml.replace(/\{\{SLUG_FILE\}\}/g, fileName);
+    templateHtml = templateHtml.replace(/\{\{DATA_ISO\}\}/g, new Date().toISOString());
 
     fs.writeFileSync(postFilePath, templateHtml);
     console.log(`Post gerado com sucesso: ${postFilePath}`);
+
+    // Atualizar sitemap.xml
+    updateSitemap();
 
     const blogHtmlPath = path.join(__dirname, '..', 'blog.html');
     let blogHtml = fs.readFileSync(blogHtmlPath, 'utf8');

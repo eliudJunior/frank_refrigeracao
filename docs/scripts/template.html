@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Blog de Refrigeração: {{TITULO}}">
     <title>{{TITULO}} | Frank Refrigeração</title>
+    
+    <!-- SEO & Social Media -->
+    <link rel="canonical" href="https://refrigeracaopnz.com.br/blog/{{SLUG_FILE}}">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{TITULO}} | Frank Refrigeração">
+    <meta property="og:description" content="Blog de Refrigeração: {{TITULO}}">
+    <meta property="og:url" content="https://refrigeracaopnz.com.br/blog/{{SLUG_FILE}}">
+    <meta property="og:site_name" content="Frank Refrigeração">
+    <meta property="article:published_time" content="{{DATA_ISO}}">
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "{{TITULO}}",
+      "description": "Blog de Refrigeração: {{TITULO}}",
+      "author": {
+        "@type": "Person",
+        "name": "Frank"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Frank Refrigeração",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://refrigeracaopnz.com.br/assets/logo.png"
+        }
+      },
+      "datePublished": "{{DATA_ISO}}"
+    }
+    </script>
+
     <link rel="icon" href="data:,">
     
     <link rel="stylesheet" href="../style.css">

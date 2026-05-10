@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://refrigeracaopnz.com.br/sitemap.xml
