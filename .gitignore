@@ -3,3 +3,9 @@ node_modules/
 .DS_Store
 *.log
 .vscode/
+
+# Backup & Temporary files
+*.bak
+*.old
+*.tmp
+.env*
