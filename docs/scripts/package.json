@@ -4,9 +4,11 @@
   "description": "Daily blog generation using Gemini API",
   "main": "gerar-post.js",
   "scripts": {
-    "start": "node gerar-post.js"
+    "start": "node gerar-post.js",
+    "test": "node --test security.test.js"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.1"
+    "@google/generative-ai": "^0.24.1",
+    "sanitize-html": "^2.13.0"
   }
 }
