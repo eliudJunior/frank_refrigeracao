@@ -1,6 +1,21 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const fs = require('fs');
 const path = require('path');
+const sanitizeHtml = require('sanitize-html');
+
+function sanitizeSlug(slug) {
+  return slug.replace(/[^a-zA-Z0-9-_]/g, '').toLowerCase();
+}
+
+function sanitizeContent(html) {
+  return sanitizeHtml(html, {
+    allowedTags: [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ul', 'ol', 'li', 'strong', 'em', 'span', 'br', 'a' ],
+    allowedAttributes: {
+      'a': [ 'href', 'target', 'rel' ]
+    },
+    allowedSchemes: [ 'http', 'https', 'mailto', 'tel' ]
+  });
+}
 
 // Inicializando a API do Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -130,9 +145,15 @@ Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
 
     
     const today = new Date().toISOString().split('T')[0];
-    const fileName = `${today}-${postData.slug}.html`;
-    const blogDirPath = path.join(__dirname, '..', 'blog');
-    const postFilePath = path.join(blogDirPath, fileName);
+    const sanitizedSlug = sanitizeSlug(postData.slug);
+    const fileName = `${today}-${sanitizedSlug}.html`;
+    const blogDirPath = path.resolve(__dirname, '..', 'blog');
+    const postFilePath = path.resolve(blogDirPath, fileName);
+
+    // Path Traversal verification
+    if (!postFilePath.startsWith(blogDirPath)) {
+        throw new Error(`[SEGURANÇA] Caminho de escrita inválido ou tentativa de Path Traversal detectada: ${postFilePath}`);
+    }
 
     if (!fs.existsSync(blogDirPath)) {
         fs.mkdirSync(blogDirPath, { recursive: true });
@@ -142,7 +163,8 @@ Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
     let templateHtml = fs.readFileSync(templatePath, 'utf8');
     
     templateHtml = templateHtml.replace(/\{\{TITULO\}\}/g, postData.titulo);
-    templateHtml = templateHtml.replace(/\{\{CONTEUDO\}\}/g, postData.conteudoHtml);
+    const cleanHtml = sanitizeContent(postData.conteudoHtml);
+    templateHtml = templateHtml.replace(/\{\{CONTEUDO\}\}/g, cleanHtml);
     templateHtml = templateHtml.replace(/\{\{SLUG_FILE\}\}/g, fileName);
     templateHtml = templateHtml.replace(/\{\{DATA_ISO\}\}/g, new Date().toISOString());
 
@@ -179,4 +201,8 @@ Retorne sua resposta ESTRITAMENTE em formato JSON com as seguintes chaves:
   }
 }
 
-main();
+if (require.main !== module) {
+  module.exports = { sanitizeSlug, sanitizeContent };
+} else {
+  main();
+}
